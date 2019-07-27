@@ -161,6 +161,8 @@ createRestaurantHTML = (restaurant) => {
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.alt = `Image of ${restaurant.name}`;
+
   li.append(image);
 
   const name = document.createElement('h1');
@@ -178,6 +180,7 @@ createRestaurantHTML = (restaurant) => {
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
+  more.setAttribute('aria-label', `Details for ${restaurant.name}`);
   li.append(more)
 
   return li
@@ -198,13 +201,38 @@ addMarkersToMap = (restaurants = self.restaurants) => {
   });
 
 } 
-/* addMarkersToMap = (restaurants = self.restaurants) => {
-  restaurants.forEach(restaurant => {
-    // Add marker to the map
-    const marker = DBHelper.mapMarkerForRestaurant(restaurant, self.map);
-    google.maps.event.addListener(marker, 'click', () => {
-      window.location.href = marker.url
+
+//IndexController.prototype._registerServiceWorker = function () {
+  if (navigator.serviceWorker) {
+
+    var indexController = this;
+
+    navigator.serviceWorker.register('/sw.js').then(function (reg) {
+      if (!navigator.serviceWorker.controller) {
+        return;
+      }
+
+      if (reg.waiting) {
+        indexController._updateReady(reg.waiting);
+        return;
+      }
+
+      if (reg.installing) {
+        indexController._trackInstalling(reg.installing);
+        return;
+      }
+
+      reg.addEventListener('updatefound', function () {
+        indexController._trackInstalling(reg.installing);
+      });
     });
-    self.markers.push(marker);
-  });
-} */
+}
+  // Ensure refresh is only called once.
+  // This works around a bug in "force update on reload".
+  //var refreshing;
+  //navigator.serviceWorker.addEventListener('controllerchange', function () {
+  //  if (refreshing) return;
+  //  window.location.reload();
+  //  refreshing = true;
+  //});
+//};
