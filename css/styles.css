@@ -85,7 +85,6 @@ nav h1 a {
     background-color: #eee;
     font-size: 17px;
     margin: 0;
-    width: calc(50% - 80px);
 }
 
 /* Display list items side by side */
@@ -207,6 +206,7 @@ nav h1 a {
 .inside #map-container {
   background: blue none repeat scroll 0 0;
   height: 500px;
+  padding-top: 120px;
 }
 .inside #map {
   background-color: #ccc;
@@ -285,12 +285,6 @@ nav h1 a {
 
 @media screen and (max-width: 549px) {
   
-    .inside #map-container,
-    .inside #restaurant-container, 
-    .inside #reviews-container {
-      width: 100%;
-    }
- 
     .inside #map-container {
       order: 1;
     }
@@ -301,6 +295,11 @@ nav h1 a {
 
     .inside #reviews-container {
       order: 3;
+    }
+    
+    .filter-options{
+      display: flex;
+      flex-direction: column;
     }
 
   }
