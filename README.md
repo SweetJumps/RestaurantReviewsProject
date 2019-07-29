@@ -35,4 +35,4 @@ For the versions available, see the [tags on this repository]
 ## Acknowledgments
 
 * Much of this code was derived from quiz code and projects from previous FEND lessons.
-* etc
+* Ever take that off any sweet jumps? - Napoleon Dynamite
