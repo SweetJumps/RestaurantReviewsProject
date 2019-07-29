@@ -161,6 +161,8 @@ createRestaurantHTML = (restaurant) => {
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.alt = `Image of ${restaurant.name}`;
+
   li.append(image);
 
   const name = document.createElement('h1');
@@ -178,6 +180,8 @@ createRestaurantHTML = (restaurant) => {
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
+  more.tabIndex = "3";
+  more.setAttribute('aria-label', `Details for ${restaurant.name}`);
   li.append(more)
 
   return li
@@ -198,13 +202,14 @@ addMarkersToMap = (restaurants = self.restaurants) => {
   });
 
 } 
-/* addMarkersToMap = (restaurants = self.restaurants) => {
-  restaurants.forEach(restaurant => {
-    // Add marker to the map
-    const marker = DBHelper.mapMarkerForRestaurant(restaurant, self.map);
-    google.maps.event.addListener(marker, 'click', () => {
-      window.location.href = marker.url
+
+//IndexController.prototype._registerServiceWorker = function () {
+  if (navigator.serviceWorker) {
+
+    navigator.serviceWorker.register('/sw.js').then(function (reg) {
+      if (!navigator.serviceWorker.controller) {
+        return;
+      }
+
     });
-    self.markers.push(marker);
-  });
-} */
+}
